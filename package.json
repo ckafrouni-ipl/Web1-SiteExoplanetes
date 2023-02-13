@@ -3,12 +3,14 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "nodemon app",
+		"dev": "nodemon app --ext *",
 		"start": "node app"
 	},
 	"dependencies": {
+		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
-		"hbs": "^4.2.0"
+		"hbs": "^4.2.0",
+		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.20"
