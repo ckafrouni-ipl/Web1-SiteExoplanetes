@@ -40,10 +40,14 @@ app.use(node_env === 'development' ? logger("dev") : logger("combined"));
 
 /* ROUTES SETUP */
 const indexRouter = require('./routes/index');
+const exolunesRouter = require('./routes/exolunes');
+const exoplanetsRouter = require('./routes/exoplanets');
 // const xRouter = require('./routes/x');
 
 let routes = [
     {path: '/', router: indexRouter},
+    {path: '/exolunes', router: exolunesRouter},
+    {path: '/exoplanets', router: exoplanetsRouter},
     // Add paths & routers here
     // ['/x', xRouter]
 ];
