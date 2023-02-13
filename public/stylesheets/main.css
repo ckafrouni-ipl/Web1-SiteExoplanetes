@@ -1,0 +1,21 @@
+html {
+	font-family: sans-serif;
+	color-scheme: light dark;
+}
+
+body {
+	background-color: #0f172a;
+}
+
+h2 {
+	color: #23ba9e;
+}
+
+p {
+	max-width: 80ch;
+}
+
+main {
+	max-width: 80vw;
+	margin-inline: auto;
+}
