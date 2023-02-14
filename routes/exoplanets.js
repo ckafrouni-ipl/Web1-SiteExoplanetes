@@ -48,10 +48,13 @@ router.get('/details', function (req, res) {
 
 
 router.get('/filter', function (req, res) {
+    let exoplanetsTable;
 
-    const exoplanetsTable = req.query.filter === 'Filtrer par hclass' ?
-        Exoplanet.getFilteredByHClass(req.query.hClass)
-        : Exoplanet.getFilteredByDiscoveryYear(parseInt(req.query.discoveryYear));
+    if (req.query.filter === 'hClassFilter') {
+        exoplanetsTable = Exoplanet.getFilteredByHClass(req.query.hClass);
+    } else if (req.query.filter === 'discoveryYearFilter') {
+        exoplanetsTable = Exoplanet.getFilteredByDiscoveryYear(parseInt(req.query.discoveryYear));
+    }
 
     res.render('exoplanets/index.hbs', {exoplanetsTable});
 });

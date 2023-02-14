@@ -1,6 +1,4 @@
-<section class="filterform">
-    <h3>Filtre : </h3>
-
+<div class="filterform">
     <form method="get" action="/exoplanets/filter">
         <label>
             <select name="hClass">
@@ -11,15 +9,15 @@
                 <option value="Non Habitable">Non Habitable</option>
             </select>
         </label>
-        <input type="submit" name="filter" value="Filtrer par hclass">
+        <input type="submit" name="filter" value="hClassFilter">
     </form>
     <form method="get" action="/exoplanets/filter">
         <label>
             <input type="number" min="2000" max="2025" step="1" value="2022" name="discoveryYear"/>
         </label>
-        <input type="submit" name="filter" value="Filtrer par année">
+        <input type="submit" name="filter" value="discoveryYearFilter">
     </form>
-</section>
+</div>
 <table>
     <tr>
         <th>Id Exoplanète</th>
