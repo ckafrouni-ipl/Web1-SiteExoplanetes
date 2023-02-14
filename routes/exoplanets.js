@@ -5,7 +5,7 @@ const Exoplanet = require("../models/exoplanets");
 
 /* GET index. */
 router.get('/', function (req, res, next) {
-    res.render('indexExoplanet.hbs', {
+    res.render('exoplanets/index.hbs', {
         exoplanetsTable: Exoplanet.getAll()
     });
 });
@@ -31,7 +31,7 @@ router.get('/search', function (req, res, next) {
 
     const exoplanetSearch = Exoplanet.searchByUniqueName(req.query.uniqueNameExoplanet);
 
-    res.render('indexExoplanet.hbs', {
+    res.render('exoplanets/index.hbs', {
         exoplanetsTable: Exoplanet.getAll(),
         min3charOK: exoplanetSearch.min3charOK,
         exoplanet: exoplanetSearch.exoplanet
@@ -45,7 +45,7 @@ router.get('/details', function (req, res, next) {
 
     const searchQuery = Exoplanet.findById(parseInt(req.query.id));
 
-    res.render('details.hbs', {
+    res.render('exoplanets/details.hbs', {
         id_error: searchQuery.id_error,
         exoplanet: searchQuery.exoplanet
     });
@@ -59,13 +59,13 @@ router.get('/filter', function (req, res, next) {
         Exoplanet.getFilteredByHClass(req.query.hClassExoplanet)
         : Exoplanet.getFilteredByDiscoveryYear(parseInt(req.query.discoveryYearExoplanet));
 
-    res.render('indexExoplanet.hbs', {exoplanetsTable});
+    res.render('exoplanets/index.hbs', {exoplanetsTable});
 });
 
 router.get('/update', function (req, res, next) {
     const searchQuery = Exoplanet.findById(parseInt(req.query.id));
 
-    res.render('updateExoplanet.hbs', {
+    res.render('exoplanets/update.hbs', {
         id_error: searchQuery.id_error,
         exoplanet: searchQuery.exoplanet
     });

@@ -5,7 +5,7 @@ const ForumMessages = require("../models/forumMessages");
 
 
 router.get('/', (req, res) => {
-    res.render('forum.hbs', {messagesTable: ForumMessages.getAll()});
+    res.render('forum/index.hbs', {messagesTable: ForumMessages.getAll()});
 });
 
 router.post('/like', (req, res) => {

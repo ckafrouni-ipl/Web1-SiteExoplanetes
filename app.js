@@ -10,10 +10,8 @@ const host = "localhost";
 const port = 3000;
 const node_env = process.env.NODE_ENV || 'development';
 
-
-/* VIEW ENGINE SETUP */
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+/* HandleBars setup */
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 // The {{#exists}} helper checks if a variable is defined.
 hbs.registerHelper('exists', function (variable, options) {
@@ -30,6 +28,9 @@ hbs.registerHelper('eq', function (a, b) {
     return a === b;
 });
 
+/* VIEW ENGINE SETUP */
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
