@@ -42,12 +42,14 @@ app.use(node_env === 'development' ? logger("dev") : logger("combined"));
 const indexRouter = require('./routes/index');
 const exolunesRouter = require('./routes/exolunes');
 const exoplanetsRouter = require('./routes/exoplanets');
+const forumRouter = require('./routes/forum');
 // const xRouter = require('./routes/x');
 
 let routes = [
     {path: '/', router: indexRouter},
     {path: '/exolunes', router: exolunesRouter},
     {path: '/exoplanets', router: exoplanetsRouter},
+    {path: '/forum', router: forumRouter},
     // Add paths & routers here
     // ['/x', xRouter]
 ];
