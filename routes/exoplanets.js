@@ -62,5 +62,28 @@ router.get('/filter', function (req, res, next) {
     res.render('indexExoplanet.hbs', {exoplanetsTable});
 });
 
+router.get('/update', function (req, res, next) {
+    const searchQuery = Exoplanet.findById(parseInt(req.query.id));
+
+    res.render('updateExoplanet.hbs', {
+        id_error: searchQuery.id_error,
+        exoplanet: searchQuery.exoplanet
+    });
+});
+
+router.post('/update', function (req, res, next) {
+
+    let exoplanet = Exoplanet.update({
+        id: parseInt(req.body.id),
+        uniqueName: req.body.uniqueName,
+        hClass: req.body.hClass,
+        discoveryYear: parseInt(req.body.discoveryYear),
+        ist: parseFloat(req.body.ist),
+        pClass: req.body.pClass,
+    });
+
+    res.redirect('details?id=' + exoplanet.id);
+})
+
 
 module.exports = router;

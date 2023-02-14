@@ -19,8 +19,14 @@
                     <td>{{exoplanet.uniqueName}} </td>
                     <td>{{exoplanet.hClass}} </td>
                     <td>{{exoplanet.discoveryYear}} </td>
-                    <td>{{exoplanet.IST}} </td>
+                    <td>{{exoplanet.ist}} </td>
                     <td>{{exoplanet.pClass}} </td>
+                    <td>
+                        <form method="GET" action="/exoplanets/update">
+                            <input type="hidden" name="id" value="{{exoplanet.id}}">
+                            <input type="submit" value="Mettre à jour">
+                        </form>
+                    </td>
                 </tr>
             </table>
         {{else}}

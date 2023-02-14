@@ -4,7 +4,7 @@ const exoplanetsTable = [
         uniqueName: "TRAPPIST-1-d",
         hClass: "Mésoplanète",
         discoveryYear: 2016,
-        IST: 0.9,
+        ist: 0.9,
         pClass: "Sous-terrienne chaude"
     },
     {
@@ -12,7 +12,7 @@ const exoplanetsTable = [
         uniqueName: "KOI-1686.01",
         hClass: "Mésoplanète",
         discoveryYear: 2011,
-        IST: 0.89,
+        ist: 0.89,
         pClass: "Super-terrienne chaude"
     },
     {
@@ -20,7 +20,7 @@ const exoplanetsTable = [
         uniqueName: "LHS 1723 b",
         hClass: "Mésoplanète",
         discoveryYear: 2017,
-        IST: 0.89,
+        ist: 0.89,
         pClass: "Super-terrienne chaude"
     },
 ];
@@ -108,6 +108,15 @@ function getFilteredByDiscoveryYear(discoveryYear) {
     return exoplanetsTableFilter;
 }
 
+function update(obj) {
+    const {id_error, exoplanet} = findById(obj.id);
+
+    console.log('found :');
+    console.log(obj);
+
+    return Object.assign(exoplanet, exoplanet, obj);
+}
+
 module.exports = {
     add,
     getAll,
@@ -115,4 +124,5 @@ module.exports = {
     findById,
     getFilteredByHClass,
     getFilteredByDiscoveryYear,
+    update,
 };
