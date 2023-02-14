@@ -1,4 +1,4 @@
-const forumMessages = [
+const forum = [
     {
         id: 0,
         message: 'Message entré manuellement',
@@ -8,11 +8,11 @@ const forumMessages = [
 ];
 
 function getAll() {
-    return forumMessages;
+    return forum;
 }
 
 function incLike(id) {
-    for (let msg of forumMessages) {
+    for (let msg of forum) {
         if (msg.id === id) {
             msg.likes++;
             break;
@@ -21,8 +21,8 @@ function incLike(id) {
 }
 
 function addMessage(obj) {
-    forumMessages.push({
-        id: forumMessages.length + 1,
+    forum.push({
+        id: forum.length + 1,
         message: obj.message,
         author: obj.author,
         likes: 0,

@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const Exoplanet = require("../models/exoplanets");
+const Exoplanet = require("../models/Exoplanets");
 
-/* GET index. */
 router.get('/', function (req, res, next) {
     res.render('exoplanets/index.hbs', {
         exoplanetsTable: Exoplanet.getAll()
@@ -11,7 +10,6 @@ router.get('/', function (req, res, next) {
 });
 
 
-/* POST add exoplanet. */
 router.post('/add', function (req, res, next) {
     console.log("POST ADD EXOPLANET");
 
@@ -25,7 +23,6 @@ router.post('/add', function (req, res, next) {
 });
 
 
-/* GET search exoplanet. */
 router.get('/search', function (req, res, next) {
     console.log("GET SEARCH EXOPLANET");
 
@@ -39,7 +36,6 @@ router.get('/search', function (req, res, next) {
 });
 
 
-/* GET details exoplanet. */
 router.get('/details', function (req, res, next) {
     console.log("GET DETAILS EXOPLANET");
 
@@ -52,7 +48,6 @@ router.get('/details', function (req, res, next) {
 });
 
 
-/* GET search exoplanet. */
 router.get('/filter', function (req, res, next) {
 
     const exoplanetsTable = req.query.filter === 'Filtrer par hclass' ?

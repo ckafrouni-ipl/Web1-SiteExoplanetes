@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ForumMessages = require("../models/forumMessages");
-
+const ForumMessages = require("../models/Forum");
 
 router.get('/', (req, res) => {
     res.render('forum/index.hbs', {messagesTable: ForumMessages.getAll()});

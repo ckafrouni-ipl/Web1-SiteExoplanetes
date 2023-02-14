@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const exolunesList = require("../models/exolunes");
-
+const exolunesList = require("../models/Exolunes");
 
 router.get('/', (req, res) => {
     console.log("Je passe par la route /exolunes");
