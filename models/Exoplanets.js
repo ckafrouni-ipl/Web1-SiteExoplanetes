@@ -38,27 +38,18 @@ function add(obj) {
     });
 }
 
-function searchByUniqueName(uniqueNameExoplanet) {
-    let min3charOK = false;
-    let exoplanetFound = null;
-    if (uniqueNameExoplanet.length >= 3) {
-        min3charOK = true;
-        for (let exoplanet of exoplanetsTable) {
-            if (exoplanet.uniqueName.toUpperCase().startsWith(uniqueNameExoplanet.toUpperCase())) {
-                console.log("trouvé");
-                exoplanetFound = exoplanet;
-                break;
-            }
+function searchByUniqueName(uniqueName) {
+    for (let exoplanet of exoplanetsTable) {
+        if (exoplanet.uniqueName.toUpperCase().startsWith(uniqueName.toUpperCase())) {
+            return exoplanet;
         }
     }
-    return {min3charOK, exoplanet: exoplanetFound}
+    return null;
 }
 
 function findById(exoplanetIdParam) {
     let id_error = false;
     let exoplanetFound = null;
-
-    console.log("exoplanetIdParam : " + exoplanetIdParam);
 
     if (isNaN(exoplanetIdParam)) {
         id_error = true;
@@ -67,7 +58,6 @@ function findById(exoplanetIdParam) {
         for (let exoplanet of exoplanetsTable) {
             if (exoplanet.id === exoplanetIdParam) {
                 exoplanetFound = exoplanet;
-                console.log("trouvé : " + exoplanet.id);
                 break;
             }
         }
@@ -81,12 +71,10 @@ function findById(exoplanetIdParam) {
 }
 
 function getFilteredByHClass(hClass) {
-    console.log("GET FILTER EXOPLANET HCLASS");
 
     let exoplanetsTableFilter = [];
     for (const exoplanet of exoplanetsTable) {
         if (exoplanet.hClass === hClass) {
-            console.log("trouvé" + exoplanet.uniqueName);
             exoplanetsTableFilter.push(exoplanet);
         }
     }
@@ -95,12 +83,10 @@ function getFilteredByHClass(hClass) {
 }
 
 function getFilteredByDiscoveryYear(discoveryYear) {
-    console.log("GET FILTER EXOPLANET ANNEE");
-
     let exoplanetsTableFilter = [];
+
     for (const exoplanet of exoplanetsTable) {
         if (exoplanet.discoveryYear === discoveryYear) {
-            console.log("trouvé" + exoplanet.uniqueName);
             exoplanetsTableFilter.push(exoplanet);
         }
     }
@@ -110,10 +96,6 @@ function getFilteredByDiscoveryYear(discoveryYear) {
 
 function update(obj) {
     const {id_error, exoplanet} = findById(obj.id);
-
-    console.log('found :');
-    console.log(obj);
-
     return Object.assign(exoplanet, exoplanet, obj);
 }
 

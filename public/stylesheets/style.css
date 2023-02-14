@@ -6,14 +6,12 @@
 
 footer,
 header {
-    background-color: black;
     color: white;
     padding-bottom: 20px;
     text-align: center;
 }
 
 header nav {
-    background-color: sandybrown;
     padding: 5px;
     text-align: left;
 }

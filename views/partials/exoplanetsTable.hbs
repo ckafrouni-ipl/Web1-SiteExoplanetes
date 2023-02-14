@@ -3,7 +3,7 @@
 
     <form method="get" action="/exoplanets/filter">
         <label>
-            <select name="hClassExoplanet">
+            <select name="hClass">
                 <option value="Mésoplanète"> Mésoplanète</option>
                 <option value="Psychroplanète">Psychroplanète</option>
                 <option value="Thermoplanète">Thermoplanète</option>
@@ -15,7 +15,7 @@
     </form>
     <form method="get" action="/exoplanets/filter">
         <label>
-            <input type="number" min="2000" max="2025" step="1" value="2022" name="discoveryYearExoplanet"/>
+            <input type="number" min="2000" max="2025" step="1" value="2022" name="discoveryYear"/>
         </label>
         <input type="submit" name="filter" value="Filtrer par année">
     </form>

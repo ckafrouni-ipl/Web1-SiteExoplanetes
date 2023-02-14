@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
 
 router.post('/like', (req, res) => {
     if (req.body.id) {
-        console.log(req.body.id);
         ForumMessages.incLike(parseInt(req.body.id));
     }
 

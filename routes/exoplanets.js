@@ -3,42 +3,41 @@ const router = express.Router();
 
 const Exoplanet = require("../models/Exoplanets");
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     res.render('exoplanets/index.hbs', {
         exoplanetsTable: Exoplanet.getAll()
     });
 });
 
 
-router.post('/add', function (req, res, next) {
-    console.log("POST ADD EXOPLANET");
-
+router.post('/add', function (req, res) {
     Exoplanet.add({
-        uniqueName: req.body.uniqueNameExoplanet,
-        hClass: req.body.hClassExoplanet,
-        discoveryYear: parseInt(req.body.discoveryYearExoplanet)
+        uniqueName: req.body.uniqueName,
+        hClass: req.body.hClass,
+        discoveryYear: parseInt(req.body.discoveryYear)
     });
 
     res.redirect('back');
 });
 
 
-router.get('/search', function (req, res, next) {
-    console.log("GET SEARCH EXOPLANET");
+router.get('/search', function (req, res) {
+    let params;
 
-    const exoplanetSearch = Exoplanet.searchByUniqueName(req.query.uniqueNameExoplanet);
+    if (req.query.uniqueName.length < 3)  {
+        params = {min3char: true,}
+    } else {
+        params = {exoplanet: Exoplanet.searchByUniqueName(req.query.uniqueName),}
+    }
 
     res.render('exoplanets/index.hbs', {
         exoplanetsTable: Exoplanet.getAll(),
-        min3charOK: exoplanetSearch.min3charOK,
-        exoplanet: exoplanetSearch.exoplanet
+        ...params,
     });
 });
 
 
-router.get('/details', function (req, res, next) {
-    console.log("GET DETAILS EXOPLANET");
-
+router.get('/details', function (req, res) {
     const searchQuery = Exoplanet.findById(parseInt(req.query.id));
 
     res.render('exoplanets/details.hbs', {
@@ -48,16 +47,16 @@ router.get('/details', function (req, res, next) {
 });
 
 
-router.get('/filter', function (req, res, next) {
+router.get('/filter', function (req, res) {
 
     const exoplanetsTable = req.query.filter === 'Filtrer par hclass' ?
-        Exoplanet.getFilteredByHClass(req.query.hClassExoplanet)
-        : Exoplanet.getFilteredByDiscoveryYear(parseInt(req.query.discoveryYearExoplanet));
+        Exoplanet.getFilteredByHClass(req.query.hClass)
+        : Exoplanet.getFilteredByDiscoveryYear(parseInt(req.query.discoveryYear));
 
     res.render('exoplanets/index.hbs', {exoplanetsTable});
 });
 
-router.get('/update', function (req, res, next) {
+router.get('/update', function (req, res) {
     const searchQuery = Exoplanet.findById(parseInt(req.query.id));
 
     res.render('exoplanets/update.hbs', {
@@ -66,7 +65,7 @@ router.get('/update', function (req, res, next) {
     });
 });
 
-router.post('/update', function (req, res, next) {
+router.post('/update', function (req, res) {
 
     let exoplanet = Exoplanet.update({
         id: parseInt(req.body.id),

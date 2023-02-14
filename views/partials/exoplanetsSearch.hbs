@@ -1,18 +1,14 @@
 <form method="get" action="/exoplanets/search">
     <label>
-        <input type="text" name="uniqueNameExoplanet">
+        <input type="text" name="uniqueName">
     </label>
     <input type="submit">
 </form>
 
-{{#exists min3charOK}}
-    {{#unless min3charOK }}
-        <p> 3 carac min</p>
-    {{else}}
-        {{#if exoplanet}}
-            {{exoplanet.uniqueName}}
-        {{else}}
-            <p>Aucun résultat</p>
-        {{/if}}
-    {{/unless}}
-{{/exists}}
+{{#if min3char}}
+    <p> 3 carac min</p>
+{{else if exoplanet}}
+    {{exoplanet.uniqueName}}
+{{else}}
+    <p>Aucun résultat</p>
+{{/if}}
