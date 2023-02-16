@@ -1,110 +1,61 @@
-const exoplanetsTable = [
-    {
-        id: 1,
-        uniqueName: "TRAPPIST-1-d",
-        hClass: "Mésoplanète",
-        discoveryYear: 2016,
-        ist: 0.9,
-        pClass: "Sous-terrienne chaude"
-    },
-    {
-        id: 2,
-        uniqueName: "KOI-1686.01",
-        hClass: "Mésoplanète",
-        discoveryYear: 2011,
-        ist: 0.89,
-        pClass: "Super-terrienne chaude"
-    },
-    {
-        id: 3,
-        uniqueName: "LHS 1723 b",
-        hClass: "Mésoplanète",
-        discoveryYear: 2017,
-        ist: 0.89,
-        pClass: "Super-terrienne chaude"
-    },
-];
+const db = require("../db")
 
 function getAll() {
-    return exoplanetsTable;
+    return db.query(`
+        SELECT * FROM exoplanets.exoplanets
+        `,)
 }
 
 function add(obj) {
-    exoplanetsTable.push({
-        id: exoplanetsTable.length + 1,
-        uniqueName: obj.uniqueName,
-        hClass: obj.hClass,
-        discoveryYear: parseInt(obj.discoveryYear)
-    });
+    return db.query(`
+        INSERT INTO exoplanets.exoplanets (unique_name, h_class, discovery_year)
+        VALUES ($1, $2, $3);
+        `, [obj.unique_name, obj.h_class, obj.discovery_year])
 }
 
-function searchByUniqueName(uniqueName) {
-    for (let exoplanet of exoplanetsTable) {
-        if (exoplanet.uniqueName.toUpperCase().startsWith(uniqueName.toUpperCase())) {
-            return exoplanet;
-        }
-    }
-    return null;
+function findByUniqueName(unique_name) {
+    return db.query(`
+        SELECT * FROM exoplanets.exoplanets 
+        WHERE unique_name ILIKE $1
+        `, [unique_name])
 }
 
 function findById(exoplanetIdParam) {
-    let id_error = false;
-    let exoplanetFound = null;
-
-    if (isNaN(exoplanetIdParam)) {
-        id_error = true;
-    } else {
-
-        for (let exoplanet of exoplanetsTable) {
-            if (exoplanet.id === exoplanetIdParam) {
-                exoplanetFound = exoplanet;
-                break;
-            }
-        }
-    }
-
-    return {
-        id_error,
-        exoplanet: exoplanetFound,
-    }
-
+    return db.query(`
+        SELECT * FROM exoplanets.exoplanets 
+        WHERE id=$1
+        `, [exoplanetIdParam])
 }
 
-function getFilteredByHClass(hClass) {
-
-    let exoplanetsTableFilter = [];
-    for (const exoplanet of exoplanetsTable) {
-        if (exoplanet.hClass === hClass) {
-            exoplanetsTableFilter.push(exoplanet);
-        }
-    }
-
-    return exoplanetsTableFilter;
+function filterByHClass(hClass) {
+    return db.query(`
+        SELECT * FROM exoplanets.exoplanets
+        WHERE h_class ILIKE $1;
+        `, [hClass]
+    )
 }
 
-function getFilteredByDiscoveryYear(discoveryYear) {
-    let exoplanetsTableFilter = [];
-
-    for (const exoplanet of exoplanetsTable) {
-        if (exoplanet.discoveryYear === discoveryYear) {
-            exoplanetsTableFilter.push(exoplanet);
-        }
-    }
-
-    return exoplanetsTableFilter;
+function filterByDiscoveryYear(discoveryYear) {
+    return db.query(`
+        SELECT * FROM exoplanets.exoplanets
+        WHERE discovery_year=$1;
+        `, [discoveryYear]
+    )
 }
 
-function update(obj) {
-    const {id_error, exoplanet} = findById(obj.id);
-    return Object.assign(exoplanet, exoplanet, obj);
+function update(id, obj) {
+    return db.query(`
+        UPDATE exoplanets.exoplanets
+        SET unique_name=$2,
+            h_class=$3,
+            discovery_year=$4,
+            ist=$5,
+            p_class=$6
+        WHERE id=$1;
+        `, [id, obj.unique_name, obj.h_class, obj.discovery_year, obj.ist, obj.p_class]
+    )
 }
 
 module.exports = {
-    add,
-    getAll,
-    searchByUniqueName,
-    findById,
-    getFilteredByHClass,
-    getFilteredByDiscoveryYear,
-    update,
-};
+    add, getAll, findByUniqueName, findById, filterByHClass, filterByDiscoveryYear, update,
+}
