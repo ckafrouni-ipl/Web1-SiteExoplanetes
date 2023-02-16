@@ -1,11 +1,30 @@
-const express = require('express');
-const router = express.Router();
+const rootRouter = require('./root')
+const exomoonsRouter = require('./exomoons')
+const exoplanetsRouter = require('./exoplanets')
+const forumRouter = require('./forum')
+// const xRouter = require('./x')
 
-router.get('/', (req, res) => {
-    const today = new Date();
-    const todayString = "Nous sommes le " + today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + ".";
-    const hourtodayString = "Il est " + today.getHours() + ":" + today.getMinutes() + " à Bruxelles";
-    res.render('index.hbs', {today: todayString + " " + hourtodayString});
-});
+let routes = [
+    {path: '/', router: rootRouter},
+    {path: '/exomoons', router: exomoonsRouter},
+    {path: '/exoplanets', router: exoplanetsRouter},
+    {path: '/forum', router: forumRouter},
+    // Add paths & routers here
+    // ['/x', xRouter]
+]
 
-module.exports = router;
+function mountApp(app) {
+    routes.forEach((route) => {
+        app.use(route.path, route.router)
+    })
+    return app
+}
+
+function displayRoutes(host, port) {
+    console.log('Quick links :')
+    routes.forEach((route) => {
+        console.log(`\thttp://${host}:${port}${route.path}`)
+    })
+}
+
+module.exports = {mountApp, displayRoutes}
