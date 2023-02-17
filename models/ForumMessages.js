@@ -11,8 +11,8 @@ function getAll() {
 function incLike(id) {
     return db.query(`
         UPDATE exoplanets.forum_messages fm
-        SET likes=fm.likes+1
-        WHERE fm.id=$1
+        SET likes=fm.likes + 1
+        WHERE fm.id = $1
     `, [id])
 }
 

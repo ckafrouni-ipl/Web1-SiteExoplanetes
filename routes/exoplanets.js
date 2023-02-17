@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Exoplanet = require("../models/Exoplanets")
 
-router.get('/', async function (req, res) {
+router.get('/', async (req, res) => {
     try {
         let {rows} = await Exoplanet.getAll()
         res.render('exoplanets/index.hbs', {exoplanetsTable: rows})
@@ -13,7 +13,7 @@ router.get('/', async function (req, res) {
 })
 
 
-router.post('/add', async function (req, res) {
+router.post('/add', async (req, res) => {
     try {
         let _ = await Exoplanet.add({
             unique_name: req.body.unique_name,
@@ -27,7 +27,7 @@ router.post('/add', async function (req, res) {
 })
 
 
-router.get('/search', async function (req, res) {
+router.get('/search', async (req, res) => {
     try {
         let {rows} = await Exoplanet.getAll()
         let exoplanet = await Exoplanet.findByUniqueName(req.query.unique_name)
@@ -41,7 +41,7 @@ router.get('/search', async function (req, res) {
 })
 
 
-router.get('/details', async function (req, res) {
+router.get('/details', async (req, res) => {
     try {
         let {rows} = await Exoplanet.findById(parseInt(req.query.id))
         res.status(200).render('exoplanets/details.hbs', {exoplanet: rows[0]})
@@ -51,7 +51,7 @@ router.get('/details', async function (req, res) {
 })
 
 
-router.get('/filter', function (req, res) {
+router.get('/filter', async (req, res) => {
     if (req.query.h_class) {
         Exoplanet.filterByHClass(req.query.h_class)
             .then(data => res.status(200).render('exoplanets/index.hbs', {exoplanetsTable: data.rows}))
@@ -63,7 +63,7 @@ router.get('/filter', function (req, res) {
     }
 })
 
-router.get('/update', async function (req, res) {
+router.get('/update', async (req, res) => {
     try {
         let data = await Exoplanet.findById(parseInt(req.query.id))
         let id_error
@@ -78,7 +78,7 @@ router.get('/update', async function (req, res) {
     }
 })
 
-router.post('/update', async function (req, res) {
+router.post('/update', async (req, res) => {
     try {
         let data = await Exoplanet.update(parseInt(req.body.id), {
             unique_name: req.body.unique_name,
