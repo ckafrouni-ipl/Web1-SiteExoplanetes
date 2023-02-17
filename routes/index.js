@@ -1,7 +1,7 @@
 const rootRouter = require('./root')
 const exomoonsRouter = require('./exomoons')
 const exoplanetsRouter = require('./exoplanets')
-const forumRouter = require('./forum')
+const forumRouter = require('./forumMessages')
 // const xRouter = require('./x')
 
 let routes = [
