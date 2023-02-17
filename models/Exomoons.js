@@ -1,3 +1,11 @@
-const exolunesList = ['DH Tauri', 'Kepler-409', 'WASP-49'];
+const db = require("../db")
 
-module.exports = exolunesList;
+function getAll() {
+    return db.query(`
+        SELECT * FROM exoplanets.exomoons
+        `,)
+}
+
+module.exports = {
+    getAll
+};
