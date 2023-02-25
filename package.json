@@ -1,10 +1,10 @@
 {
-	"name": "code-climb",
+	"name": "site-exoplanetes",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "nodemon app --ext *",
-		"start": "node app",
+		"dev": "nodemon src/app.js --ext *",
+		"start": "node src/app.js",
 		"lint": "eslint ."
 	},
 	"dependencies": {
