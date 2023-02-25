@@ -25,14 +25,6 @@ VALUES ('DH Tauri'),
 	   ('Kepler-409'),
 	   ('WASP-49');
 ---------------------------------------------------------------------------------------
--- const forumMessages = [
---     {
---         id: 0,
---         message: 'Message entré manuellement',
---         author: 'Javascript',
---         likes: 0,
---     },
--- ];
 CREATE TABLE exoplanets.forum_messages
 (
 	id      SERIAL PRIMARY KEY,
