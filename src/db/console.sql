@@ -35,4 +35,13 @@ CREATE TABLE exoplanets.forum_messages
 
 INSERT INTO exoplanets.forum_messages (message, author)
 VALUES ('Premier message', 'Christophe'),
-       ('Second msg', 'Jack');
+	   ('Second msg', 'Jack');
+---------------------------------------------------------------------------------------
+CREATE TABLE users
+(
+	id       SERIAL PRIMARY KEY,
+	email    VARCHAR(100) UNIQUE                           NOT NULL,
+	password TEXT                                          NOT NULL,
+	role     VARCHAR(10) DEFAULT 'user'::CHARACTER VARYING NOT NULL,
+	name     VARCHAR(30) DEFAULT 'anonymous'::CHARACTER VARYING
+);
