@@ -24,12 +24,15 @@ partialsDirs.forEach(dir => {
 
 hbs.registerHelper('eq', (a, b) => a === b)
 hbs.registerHelper('exists', function (variable, options) {
+	/**
+	 * @namespace options
+	 * @property {function} fn
+	 * @property {function} inverse
+	 */
 	if (typeof variable !== 'undefined') {
 		return options.fn(this)
-	} else {
-		// options.inverse == else block
-		return options.inverse(this)
 	}
+	return options.inverse(this)
 })
 
 /***************
@@ -42,7 +45,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(nodeEnv === 'development' ? logger('dev') : logger('combined'))
 
@@ -55,10 +58,11 @@ app.use(session({
 	}
 }))
 app.use((req, res, next) => {
+	/** @namespace req.session */
 	res.locals.session = req.session
 	next()
 })
 
-const { mountApp, displayRoutes } = require('./routes')
+const {mountApp, displayRoutes} = require('./routes')
 mountApp(app)
 	.listen(port, host, () => displayRoutes(host, port))

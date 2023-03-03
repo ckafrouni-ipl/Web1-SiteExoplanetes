@@ -4,7 +4,14 @@ const bcrypt = require('bcrypt')
 const router = express.Router()
 
 const Users = require('../models/Users')
-const auth = require('./middlewares/auth')
+const auth = require('../middlewares/auth')
+
+/**
+ * @namespace req.body
+ * @property {string} email
+ * @property {string} password
+ * @property {string} confirm_password
+ */
 
 router.get('/register', async (req, res) => {
 	res.render('users/register.hbs')

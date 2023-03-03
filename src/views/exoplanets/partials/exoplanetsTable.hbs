@@ -1,3 +1,4 @@
+<!--suppress SyntaxError -->
 <div class="filterform">
     <form method="get" action="/exoplanets/filter">
         <label>
@@ -28,7 +29,7 @@
     {{#each exoplanetsTable}}
         <tr>
             <td>{{this.id}}</td>
-            <td><a href="/exoplanets/details?id={{this.id}}"> {{this.unique_name}} </a></td>
+            <td><a href="/exoplanets/details?id={{this.id}}">{{this.unique_name}}</a></td>
             <td>{{this.h_class}} </td>
             <td>{{this.discovery_year}} </td>
         </tr>

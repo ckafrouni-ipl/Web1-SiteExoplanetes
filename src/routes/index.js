@@ -15,18 +15,16 @@ const routes = [
 	// ['/x', xRouter]
 ]
 
-function mountApp(app) {
+module.exports.mountApp = (app) => {
 	routes.forEach((route) => {
 		app.use(route.path, route.router)
 	})
 	return app
 }
 
-function displayRoutes(host, port) {
+module.exports.displayRoutes = (host, port) => {
 	console.log('Quick links :')
 	routes.forEach((route) => {
 		console.log(`\thttp://${host}:${port}${route.path}`)
 	})
 }
-
-module.exports = {mountApp, displayRoutes}
