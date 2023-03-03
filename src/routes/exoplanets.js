@@ -14,11 +14,11 @@ router.get('/', async (req, res) => {
 
 router.post('/add', async (req, res) => {
 	try {
-		await Exoplanet.add({
-			unique_name: req.body.unique_name,
-			h_class: req.body.h_class,
-			discovery_year: parseInt(req.body.discovery_year)
-		})
+		await Exoplanet.add(
+			req.body.unique_name,
+			req.body.h_class,
+			parseInt(req.body.discovery_year)
+		)
 		res.status(201).redirect('back')
 	} catch (err) {
 		res.status(400).json(err)
@@ -62,12 +62,12 @@ router.get('/filter', async (req, res) => {
 router.get('/update', async (req, res) => {
 	try {
 		const data = await Exoplanet.findById(parseInt(req.query.id))
-		let idError
+		let id_error = false
 		let exoplanet
-		if (data.rows.length.length === 0) idError = true
+		if (data.rows.length.length === 0) id_error = true
 		else exoplanet = data.rows[0]
-		res.status(200).render('exoplanets/update.hbs', {
-			id_error: idError, exoplanet
+		res.status(200).render('exoplanets/edit.hbs', {
+			id_error, exoplanet
 		})
 	} catch (err) {
 		res.status(400).json(err)
@@ -76,13 +76,13 @@ router.get('/update', async (req, res) => {
 
 router.post('/update', async (req, res) => {
 	try {
-		await Exoplanet.update(parseInt(req.body.id), {
-			unique_name: req.body.unique_name,
-			h_class: req.body.h_class,
-			discovery_year: parseInt(req.body.discovery_year),
-			ist: parseFloat(req.body.ist),
-			p_class: req.body.p_class
-		})
+		await Exoplanet.update(parseInt(req.body.id),
+			req.body.unique_name,
+			req.body.h_class,
+			parseInt(req.body.discovery_year),
+			parseFloat(req.body.ist),
+			req.body.p_class
+		)
 		res.status(202).redirect(`details?id=${req.body.id}`)
 	} catch (err) {
 		res.status(400).json(err)

@@ -15,14 +15,13 @@ body {
 
 a,
 a:visited {
-    color: #2de7c4;
+    color: #e5941a;
     font-weight: bold;
     text-decoration: none;
 }
 
 a:hover {
-    color: #a2a8ff;
-    text-decoration: underline;
+    color: #e66e19;
 }
 
 p {
@@ -34,28 +33,38 @@ footer {
     padding: 1rem;
 }
 
-header {
+.nav-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: larger;
 }
 
-header h1 {
-    font-size: xxx-large;
+#logo a {
+    color: white;
+    font-size: xx-large;
 }
 
-header nav {
-    font-size: x-large;
-}
-
-header nav ul {
+.nav__ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
 }
 
-header nav ul li {
-    margin: 1rem;
+.nav__ul__li a {
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-weight: bold;
+}
+
+.nav__ul__li a:hover {
+    background-color: #283648;
+    text-decoration: none;
+}
+
+.connect-link {
+    color: #ff7878;
 }
 
 section {
